@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #0a192f;
+  --color-secondary: #c53030; /* Canadian Crimson */
+  --color-accent: #f6ad55;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-display: 'Outfit', system-ui, sans-serif;
+}
+
+@layer base {
+  :root {
+    --primary: #0a192f;
+    --secondary: #c53030;
+    --background: #ffffff;
+    --text: #1a202c;
+  }
+
+  body {
+    @apply font-sans antialiased text-slate-900 bg-white;
+    scroll-behavior: smooth;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-black tracking-tight;
+    line-height: 1.1;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/70 backdrop-blur-xl border border-white/30;
+  }
+  
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-br from-slate-900 via-blue-950 to-primary;
+  }
+
+  .premium-shadow {
+    box-shadow: 0 20px 50px -12px rgba(2, 12, 27, 0.08);
+  }
+}
+

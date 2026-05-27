@@ -353,7 +353,7 @@ export default function App() {
       {/* Hero Section */}
       <section className="relative min-h-[600px] h-[80vh] flex items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <div className="w-full h-full bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/src/assets/hero.png')" }} />
+          <div className="w-full h-full bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/hero.png')" }} />
           <div className="absolute inset-0 hero-overlay" />
         </div>
         <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-8">

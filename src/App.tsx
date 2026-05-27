@@ -1,11 +1,9 @@
 import { motion, AnimatePresence } from "motion/react";
 import { 
-  Globe, 
   TrendingUp, 
   Rocket, 
   Target, 
   Users, 
-  ChevronRight, 
   Mail, 
   Phone, 
   MapPin,
@@ -13,7 +11,7 @@ import {
   X,
   ArrowRight,
   ShieldCheck,
-  Zap
+  Activity
 } from "lucide-react";
 import { useState, useEffect, type FormEvent } from "react";
 
@@ -221,11 +219,10 @@ const translations = {
 
 const Logo = () => (
   <div className="flex items-center gap-2 group cursor-pointer">
-    <div className="relative w-10 h-10 flex items-center justify-center bg-primary rounded-xl overflow-hidden shadow-lg transition-transform group-hover:scale-105">
-      <Globe className="text-white w-6 h-6 z-10" />
-      <div className="absolute inset-0 bg-gradient-to-tr from-primary to-blue-800" />
+    <div className="relative w-10 h-10 flex items-center justify-center bg-primary rounded-lg overflow-hidden transition-transform group-hover:scale-105">
+      <Activity className="text-white w-6 h-6 z-10" />
     </div>
-    <span className="font-bold text-2xl tracking-tighter text-primary">
+    <span className="font-display font-bold text-2xl tracking-tighter text-primary">
       GPS<span className="text-secondary">.</span>
     </span>
   </div>
@@ -276,55 +273,52 @@ export default function App() {
   return (
     <div className="min-h-screen bg-white font-sans text-slate-900 selection:bg-red-100 selection:text-secondary overflow-x-hidden">
       {/* Navbar */}
-      <nav className="fixed top-0 w-full z-50 glass border-b border-slate-200/50 transition-all duration-300" role="navigation" aria-label="Main navigation">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="flex justify-between h-20 items-center">
-            <Logo />
+      <nav className="fixed top-0 w-full z-50 bg-surface border-b border-outline-variant h-20" role="navigation" aria-label="Main navigation">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 h-full flex items-center justify-between">
+          <Logo />
+          
+          {/* Desktop Nav */}
+          <div className="hidden md:flex items-center gap-8">
+            <a href="#about" className="font-label-md text-label-md text-on-surface-variant font-medium hover:text-secondary transition-colors duration-200">{t.nav.about}</a>
+            <a href="#services" className="font-label-md text-label-md text-on-surface-variant font-medium hover:text-secondary transition-colors duration-200">{t.nav.services}</a>
+            <a href="#contact" className="font-label-md text-label-md text-on-surface-variant font-medium hover:text-secondary transition-colors duration-200">{t.nav.contact}</a>
             
-            {/* Desktop Nav */}
-            <div className="hidden md:flex items-center gap-10">
-              <a href="#about" className="text-sm font-semibold hover:text-secondary transition-colors uppercase tracking-wider text-slate-700" aria-current="location">{t.nav.about}</a>
-              <a href="#services" className="text-sm font-semibold hover:text-secondary transition-colors uppercase tracking-wider text-slate-700">{t.nav.services}</a>
-              <a href="#contact" className="text-sm font-semibold hover:text-secondary transition-colors uppercase tracking-wider text-slate-700">{t.nav.contact}</a>
-              
-              <div className="h-4 w-[1px] bg-slate-300 mx-2" aria-hidden="true" />
-              
-              <button 
-                onClick={toggleLang}
-                aria-label={lang === "en" ? "Passer en français" : "Switch to English"}
-                className="text-xs font-bold bg-slate-100 px-3 py-1.5 rounded-md hover:bg-slate-200 transition-colors uppercase tracking-widest border border-slate-200"
-              >
-                {lang === "en" ? "FR" : "EN"}
-              </button>
+            <div className="h-5 w-px bg-outline-variant mx-2" aria-hidden="true" />
+            
+            <button 
+              onClick={toggleLang}
+              aria-label={lang === "en" ? "Passer en français" : "Switch to English"}
+              className="text-xs font-bold text-on-surface-variant bg-surface-container-low px-3 py-1.5 rounded hover:bg-surface-container transition-colors uppercase tracking-widest"
+            >
+              {lang === "en" ? "FR" : "EN"}
+            </button>
 
-              <button
-                onClick={() => setShowContactForm(true)}
-                aria-label={t.nav.start}
-                className="bg-primary text-white px-7 py-3 rounded-xl text-sm font-bold hover:bg-primary/90 transition-all shadow-md active:scale-95"
-              >
-                {t.nav.start}
-              </button>
-            </div>
+            <button
+              onClick={() => setShowContactForm(true)}
+              className="bg-primary text-white px-6 py-3 rounded-lg font-label-md text-label-md hover:opacity-90 active:scale-95 transition-all"
+            >
+              {t.nav.start}
+            </button>
+          </div>
 
-            {/* Mobile Menu Toggle */}
-            <div className="md:hidden flex items-center gap-4">
-               <button 
-                onClick={toggleLang}
-                aria-label={lang === "en" ? "Passer en français" : "Switch to English"}
-                className="text-xs font-bold bg-slate-100 px-3 py-1.5 rounded-md border border-slate-200"
-              >
-                {lang === "en" ? "FR" : "EN"}
-              </button>
-              <button 
-                className="p-2 text-primary"
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                aria-expanded={isMenuOpen}
-                aria-controls="mobile-menu"
-                aria-label={isMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
-              >
-                {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
-              </button>
-            </div>
+          {/* Mobile Menu Toggle */}
+          <div className="md:hidden flex items-center gap-3">
+             <button 
+              onClick={toggleLang}
+              aria-label={lang === "en" ? "Passer en français" : "Switch to English"}
+              className="text-xs font-bold text-on-surface-variant bg-surface-container-low px-3 py-1.5 rounded uppercase tracking-widest"
+            >
+              {lang === "en" ? "FR" : "EN"}
+            </button>
+            <button 
+              className="p-2 text-primary"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-expanded={isMenuOpen}
+              aria-controls="mobile-menu"
+              aria-label={isMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
+            >
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
           </div>
         </div>
 
@@ -336,15 +330,15 @@ export default function App() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="md:hidden bg-white border-b border-slate-200 overflow-hidden shadow-2xl"
+              className="md:hidden bg-surface border-b border-outline-variant overflow-hidden"
               role="menu"
             >
-              <div className="px-6 py-8 flex flex-col gap-6">
-                <a href="#about" className="text-2xl font-bold text-slate-700" onClick={() => setIsMenuOpen(false)} role="menuitem">{t.nav.about}</a>
-                <a href="#services" className="text-2xl font-bold text-slate-700" onClick={() => setIsMenuOpen(false)} role="menuitem">{t.nav.services}</a>
-                <a href="#contact" className="text-2xl font-bold text-slate-700" onClick={() => setIsMenuOpen(false)} role="menuitem">{t.nav.contact}</a>
+              <div className="px-6 py-6 flex flex-col gap-4">
+                <a href="#about" className="text-lg font-bold text-on-surface" onClick={() => setIsMenuOpen(false)} role="menuitem">{t.nav.about}</a>
+                <a href="#services" className="text-lg font-bold text-on-surface" onClick={() => setIsMenuOpen(false)} role="menuitem">{t.nav.services}</a>
+                <a href="#contact" className="text-lg font-bold text-on-surface" onClick={() => setIsMenuOpen(false)} role="menuitem">{t.nav.contact}</a>
                 <button
-                  className="bg-primary text-white w-full py-4 rounded-2xl font-bold text-lg shadow-xl"
+                  className="bg-primary text-white w-full py-3 rounded-lg font-bold text-base"
                   role="menuitem"
                   onClick={() => { setIsMenuOpen(false); setShowContactForm(true); }}
                 >
@@ -357,179 +351,172 @@ export default function App() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative pt-44 pb-32 px-6 overflow-hidden">
-        {/* Background Elements */}
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-slate-50 -z-20 skew-x-12 translate-x-32" />
-        <div className="absolute -top-24 -left-24 w-96 h-96 bg-secondary/5 rounded-full blur-3xl -z-10" />
-
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <div className="inline-flex items-center gap-2 bg-slate-100 border border-slate-200 px-4 py-2 rounded-full mb-8">
-              <span className="w-2 h-2 bg-secondary rounded-full animate-pulse" />
-              <span className="text-xs font-bold uppercase tracking-widest text-slate-600">{lang === "fr" ? "Performance en Milieu Hospitalier" : "Healthcare Performance"}</span>
-            </div>
+      <section className="relative min-h-[600px] h-[80vh] flex items-center overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <div className="w-full h-full bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/src/assets/hero.png')" }} />
+          <div className="absolute inset-0 hero-overlay" />
+        </div>
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="max-w-2xl">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="inline-flex items-center gap-2 bg-surface-container-low/20 backdrop-blur-sm border border-white/10 px-4 py-2 rounded-full mb-6">
+                <span className="w-2 h-2 bg-secondary rounded-full animate-pulse" />
+                <span className="text-xs font-bold uppercase tracking-widest text-white/80">{lang === "fr" ? "Performance en Milieu Hospitalier" : "Healthcare Performance"}</span>
+              </div>
+            </motion.div>
             
-            <h1 className="text-6xl md:text-8xl font-black text-primary leading-[1.1] mb-8">
-              {t.hero.title} <br/>
-              <span className="text-gradient italic">{t.hero.titleAccent}</span>
-            </h1>
+            <motion.h1 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="font-display text-display-lg-mobile md:text-display-lg text-white font-bold leading-[1.1] mb-4"
+            >
+              {t.hero.title} <br className="hidden md:block" />
+              <span className="text-secondary">{t.hero.titleAccent}</span>
+            </motion.h1>
             
-            <p className="text-xl text-slate-600 mb-12 leading-relaxed max-w-xl">
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="font-body-lg text-body-lg text-white/80 mb-8 leading-relaxed max-w-xl"
+            >
               {t.hero.desc}
-            </p>
+            </motion.p>
             
-            <div className="flex flex-col sm:flex-row items-center gap-5">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="flex flex-col sm:flex-row items-center gap-4"
+            >
               <button
                 onClick={() => setShowContactForm(true)}
-                aria-label={t.hero.ctaPrimary}
-                className="w-full sm:w-auto bg-secondary text-white px-10 py-5 rounded-2xl text-lg font-bold hover:bg-red-700 transition-all shadow-xl shadow-red-100 flex items-center justify-center gap-3 group"
+                className="bg-secondary text-white px-8 py-4 rounded-lg font-label-md text-headline-md hover:brightness-110 active:scale-95 transition-all flex items-center gap-2"
               >
-                {t.hero.ctaPrimary} <ArrowRight className="group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+                {t.hero.ctaPrimary} <ArrowRight size={20} aria-hidden="true" />
               </button>
               <button
                 onClick={() => setShowContactForm(true)}
-                aria-label={t.hero.ctaSecondary}
-                className="w-full sm:w-auto bg-white border-2 border-slate-200 text-primary px-10 py-5 rounded-2xl text-lg font-bold hover:bg-slate-50 transition-all flex items-center justify-center"
+                className="bg-white/10 backdrop-blur-sm border border-white/20 text-white px-8 py-4 rounded-lg font-label-md text-headline-md hover:bg-white/20 transition-all"
               >
                 {t.hero.ctaSecondary}
               </button>
-            </div>
-
-            <div className="mt-16 flex items-center gap-8 grayscale opacity-50" aria-hidden="true">
-               <div className="flex items-center gap-2"><ShieldCheck className="w-5 h-5 text-secondary" aria-hidden="true" /> <span className="text-sm font-bold">Trusted</span></div>
-               <div className="flex items-center gap-2"><Zap className="w-5 h-5 text-secondary" aria-hidden="true" /> <span className="text-sm font-bold">Certified</span></div>
-            </div>
-          </motion.div>
-
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.2 }}
-            className="relative"
-          >
-            <div className="absolute inset-0 bg-secondary/10 rounded-[3rem] translate-x-6 translate-y-6 -z-10" />
-            <div className="aspect-[4/5] md:aspect-[4/3] rounded-[3rem] overflow-hidden shadow-2xl premium-shadow border-8 border-white">
-              <img 
-                src="/src/assets/hero.png" 
-                alt="Canadian Business Office" 
-                className="w-full h-full object-cover"
-              />
-            </div>
-            {/* Floating Card */}
-            <motion.div 
-              animate={{ y: [0, -10, 0] }}
-              transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-              className="absolute -bottom-10 -left-10 bg-white p-6 rounded-3xl shadow-2xl border border-slate-100 hidden md:block"
-            >
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-green-50 rounded-full flex items-center justify-center">
-                   <TrendingUp className="text-green-600" />
-                </div>
-                <div>
-                   <p className="text-xs font-bold text-slate-600 uppercase tracking-tighter">{lang === "fr" ? "Amélioration de la performance" : "Performance improvement"}</p>
-                   <p className="text-2xl font-black text-primary">+42%</p>
-                </div>
-              </div>
             </motion.div>
-          </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="mt-12 flex items-center gap-6 text-white/60"
+              aria-hidden="true"
+            >
+               <div className="flex items-center gap-2 text-sm"><ShieldCheck className="w-4 h-4 text-secondary" aria-hidden="true" /> Trusted</div>
+               <div className="flex items-center gap-2 text-sm"><Activity className="w-4 h-4 text-secondary" aria-hidden="true" /> Certified</div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Trusted By Section */}
-      <section className="py-12 border-y border-slate-100 bg-slate-50/30">
+      <section className="py-12 border-y border-outline-variant">
         <div className="max-w-7xl mx-auto px-6">
-          <p className="text-center text-xs font-black uppercase tracking-[0.4em] text-slate-400 mb-10">{lang === "fr" ? "Appuyé par des organisations de santé de premier plan" : "Trusted by leading healthcare organizations"}</p>
-          <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-40 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-700">
+          <p className="text-center text-xs font-bold uppercase tracking-[0.3em] text-on-surface-variant mb-8">{lang === "fr" ? "Appuyé par des organisations de santé de premier plan" : "Trusted by leading healthcare organizations"}</p>
+          <div className="flex flex-wrap justify-center items-center gap-10 md:gap-16 opacity-50">
             {["HôpitalGénéral", "SantéPlus", "CareMedic", "VieSanté", "MédecinsU"].map((logo, i) => (
-              <span key={i} className="text-xl md:text-2xl font-black tracking-tighter text-primary">{logo}<span className="text-secondary">.</span></span>
+              <span key={i} className="text-lg md:text-xl font-bold tracking-tighter text-on-surface">{logo}<span className="text-secondary">.</span></span>
             ))}
           </div>
         </div>
       </section>
 
       {/* About Section */}
-      <motion.section 
+      <section 
         id="about" 
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.8 }}
-        className="py-32 bg-slate-50"
+        className="py-24 scroll-mt-24"
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="text-center mb-20 space-y-6">
-            <h2 className="text-secondary font-black uppercase tracking-[0.3em] text-sm">{t.about.tag}</h2>
-            <h3 className="text-4xl md:text-5xl font-black text-primary leading-tight">{t.about.title}</h3>
-            <p className="text-lg text-slate-600 leading-relaxed max-w-3xl mx-auto">
+          <div className="mb-16">
+            <span className="text-secondary font-label-md text-label-md uppercase tracking-wider font-semibold">{t.about.tag}</span>
+            <h2 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mt-2">{t.about.title}</h2>
+            <p className="font-body-lg text-body-lg text-on-surface-variant mt-4 max-w-3xl">
               {t.about.mission}
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-24 items-center mb-32">
-            <div className="order-2 lg:order-1 relative">
-               <div className="grid grid-cols-2 gap-6">
-                  <motion.div 
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.2 }}
-                    className="bg-white p-8 rounded-3xl shadow-sm border border-slate-100"
-                  >
-                    <h4 className="text-4xl font-black text-primary mb-2">150+</h4>
-                    <p className="text-sm font-bold text-slate-600 uppercase tracking-widest">{t.about.stats[0].label}</p>
-                  </motion.div>
-                  <motion.div 
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.3 }}
-                    className="bg-primary p-8 rounded-3xl shadow-xl mt-12"
-                  >
-                    <h4 className="text-4xl font-black text-white mb-2">98%</h4>
-                    <p className="text-sm font-bold text-white/70 uppercase tracking-widest">{t.about.stats[1].label}</p>
-                  </motion.div>
-                  <motion.div 
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.4 }}
-                    className="bg-secondary p-8 rounded-3xl shadow-xl"
-                  >
-                    <h4 className="text-4xl font-black text-white mb-2">15+</h4>
-                    <p className="text-sm font-bold text-white/70 uppercase tracking-widest">Years Exp.</p>
-                  </motion.div>
-                  <motion.div 
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.5 }}
-                    className="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 mt-12"
-                  >
-                    <h4 className="text-4xl font-black text-primary mb-2">24/7</h4>
-                    <p className="text-sm font-bold text-slate-600 uppercase tracking-widest">Support</p>
-                  </motion.div>
-               </div>
-            </div>
+          <div className="grid md:grid-cols-3 gap-6 mb-20">
+            {/* Stats card */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="bento-card p-6 bg-surface-container border border-outline-variant rounded-xl flex flex-col gap-4"
+            >
+              <div className="w-12 h-12 bg-secondary rounded-lg flex items-center justify-center">
+                <TrendingUp className="text-white w-6 h-6" />
+              </div>
+              <div>
+                <h4 className="font-headline-md text-headline-md text-primary">150+</h4>
+                <p className="font-label-md text-label-md text-on-surface-variant">{t.about.stats[0].label}</p>
+              </div>
+            </motion.div>
 
-            <div className="order-1 lg:order-2 space-y-8">
-              <h4 className="text-2xl font-black text-primary">{lang === "fr" ? "Nos Valeurs" : "Our Values"}</h4>
-              <div className="flex flex-wrap gap-3">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="bento-card p-6 bg-primary rounded-xl flex flex-col gap-4"
+            >
+              <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
+                <ShieldCheck className="text-white w-6 h-6" />
+              </div>
+              <div>
+                <h4 className="font-headline-md text-headline-md text-white">98%</h4>
+                <p className="font-label-md text-label-md text-white/70">{t.about.stats[1].label}</p>
+              </div>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className="bento-card p-6 bg-surface-container border border-outline-variant rounded-xl flex flex-col gap-4"
+            >
+              <div className="w-12 h-12 bg-tertiary rounded-lg flex items-center justify-center">
+                <Activity className="text-white w-6 h-6" />
+              </div>
+              <div>
+                <h4 className="font-headline-md text-headline-md text-primary">15+</h4>
+                <p className="font-label-md text-label-md text-on-surface-variant">Years Exp.</p>
+              </div>
+            </motion.div>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-12 mb-20">
+            <div className="space-y-6">
+              <h3 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">{lang === "fr" ? "Nos Valeurs" : "Our Values"}</h3>
+              <div className="flex flex-wrap gap-2">
                 {t.about.values.map((value, i) => (
-                  <span key={i} className="px-5 py-2.5 bg-white border border-slate-200 rounded-full text-sm font-bold text-primary hover:bg-primary hover:text-white transition-colors cursor-default">
+                  <span key={i} className="px-4 py-2 bg-surface-container-low border border-outline-variant rounded-lg text-sm font-medium text-on-surface hover:bg-secondary hover:text-white hover:border-secondary transition-colors cursor-default">
                     {value}
                   </span>
                 ))}
               </div>
-              <h4 className="text-2xl font-black text-primary pt-4">{lang === "fr" ? "Ce qui nous distingue" : "What Distinguishes Us"}</h4>
-              <ul className="space-y-4">
+            </div>
+            <div className="space-y-6">
+              <h3 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">{lang === "fr" ? "Ce qui nous distingue" : "What Distinguishes Us"}</h3>
+              <ul className="space-y-3">
                 {t.about.whatDistinguishes.map((item, i) => (
-                  <li key={i} className="flex items-start gap-3 text-slate-600">
-                    <span className="w-2 h-2 bg-secondary rounded-full mt-2 shrink-0" />
-                    <span className="text-lg leading-relaxed">{item}</span>
+                  <li key={i} className="flex items-start gap-3 text-on-surface-variant">
+                    <span className="w-1.5 h-1.5 bg-secondary rounded-full mt-2 shrink-0" />
+                    <span className="font-body-md text-body-md">{item}</span>
                   </li>
                 ))}
               </ul>
@@ -537,119 +524,108 @@ export default function App() {
           </div>
 
           {/* Why Choose Us */}
-          <div className="space-y-16">
+          <div className="space-y-10">
             <div className="text-center">
-              <h3 className="text-4xl md:text-5xl font-black text-primary leading-tight">{lang === "fr" ? "Pourquoi nous choisir ?" : "Why Choose Us?"}</h3>
+              <h3 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">{lang === "fr" ? "Pourquoi nous choisir ?" : "Why Choose Us?"}</h3>
             </div>
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-3 gap-6">
               {t.about.whyChooseUs.map((item, i) => (
                 <motion.div 
                   key={i}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: i * 0.15 }}
-                  className="bg-white p-10 rounded-3xl border border-slate-100 premium-shadow hover:border-secondary/20 transition-all duration-300"
+                  transition={{ delay: i * 0.1 }}
+                  className="bento-card p-6 bg-surface-container border border-outline-variant rounded-xl flex flex-col gap-4"
                 >
-                  <div className="w-14 h-14 bg-secondary/10 rounded-2xl flex items-center justify-center mb-6">
-                    <span className="text-secondary font-black text-xl">{i + 1}</span>
+                  <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center">
+                    <span className="text-white font-bold text-lg">{i + 1}</span>
                   </div>
-                  <h4 className="text-xl font-black text-primary mb-4">{item.title}</h4>
-                  <p className="text-slate-600 leading-relaxed text-sm">{item.desc}</p>
+                  <h4 className="font-headline-md text-headline-md text-primary">{item.title}</h4>
+                  <p className="font-body-md text-body-md text-on-surface-variant">{item.desc}</p>
                 </motion.div>
               ))}
             </div>
           </div>
         </div>
-      </motion.section>
+      </section>
 
       {/* Services Section */}
-      <motion.section 
+      <section 
         id="services" 
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 1 }}
-        className="py-32 px-6"
+        className="py-24 px-6 scroll-mt-24 bg-surface"
       >
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-24 space-y-6">
-            <h2 className="text-4xl md:text-6xl font-black text-primary">{t.services.title}</h2>
-            <p className="text-xl text-slate-600 max-w-2xl mx-auto">{t.services.desc}</p>
+          <div className="mb-16">
+            <span className="text-secondary font-label-md text-label-md uppercase tracking-wider font-semibold">{lang === "fr" ? "SERVICES" : "SERVICES"}</span>
+            <h2 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mt-2">{t.services.title}</h2>
+            <p className="font-body-lg text-body-lg text-on-surface-variant mt-3 max-w-2xl">{t.services.desc}</p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {t.services.items.map((service, i) => (
               <motion.div 
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                whileHover={{ y: -10 }}
-                className="group p-10 rounded-[2.5rem] bg-white border border-slate-100 premium-shadow hover:border-secondary/20 transition-all duration-300"
+                transition={{ delay: i * 0.08 }}
+                className="bento-card p-6 bg-surface-container-low border border-outline-variant rounded-xl flex flex-col gap-4"
               >
-                <div className="w-16 h-16 bg-slate-50 text-primary rounded-2xl flex items-center justify-center mb-8 group-hover:bg-secondary group-hover:text-white transition-colors duration-300">
+                <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center text-white">
                   {service.icon}
                 </div>
-                <h4 className="text-2xl font-black mb-6 group-hover:text-secondary transition-colors">{service.title}</h4>
-                <p className="text-slate-600 leading-relaxed text-sm">
+                <h4 className="font-headline-md text-headline-md text-primary">{service.title}</h4>
+                <p className="font-body-md text-body-md text-on-surface-variant">
                   {service.description}
                 </p>
               </motion.div>
             ))}
           </div>
         </div>
-      </motion.section>
+      </section>
 
       {/* Locations Section */}
-      <section className="py-24 bg-white">
+      <section className="py-20 bg-surface-container-low">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-12">
-            <motion.div 
-              whileHover={{ y: -5 }}
-              className="p-10 rounded-[3rem] bg-slate-50 border border-slate-100 flex items-center gap-8 group transition-all"
-            >
-              <div className="w-20 h-20 bg-white rounded-3xl flex items-center justify-center shadow-sm group-hover:bg-secondary group-hover:text-white transition-colors">
-                <MapPin size={32} />
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="p-6 rounded-xl bg-surface border border-outline-variant flex items-center gap-6 bento-card">
+              <div className="w-14 h-14 bg-primary rounded-lg flex items-center justify-center text-white shrink-0">
+                <MapPin size={24} />
               </div>
               <div>
-                <h4 className="text-2xl font-black text-primary">Toronto</h4>
-                <p className="text-slate-600 font-bold uppercase tracking-widest text-xs mt-1">{lang === "fr" ? "Siège social" : "Headquarters"}</p>
-                <p className="text-slate-600 mt-2 text-sm">123 Bay Street, Financial District<br/>Toronto, ON M5H 2Y4</p>
+                <h4 className="font-headline-md text-headline-md text-primary">Toronto</h4>
+                <p className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mt-0.5">{lang === "fr" ? "Siège social" : "Headquarters"}</p>
+                <p className="font-body-md text-body-md text-on-surface-variant mt-1">123 Bay Street, Financial District<br/>Toronto, ON M5H 2Y4</p>
               </div>
-            </motion.div>
+            </div>
 
-            <motion.div 
-              whileHover={{ y: -5 }}
-              className="p-10 rounded-[3rem] bg-slate-50 border border-slate-100 flex items-center gap-8 group transition-all"
-            >
-              <div className="w-20 h-20 bg-white rounded-3xl flex items-center justify-center shadow-sm group-hover:bg-secondary group-hover:text-white transition-colors">
-                <MapPin size={32} />
+            <div className="p-6 rounded-xl bg-surface border border-outline-variant flex items-center gap-6 bento-card">
+              <div className="w-14 h-14 bg-primary rounded-lg flex items-center justify-center text-white shrink-0">
+                <MapPin size={24} />
               </div>
               <div>
-                <h4 className="text-2xl font-black text-primary">Montréal</h4>
-                <p className="text-slate-600 font-bold uppercase tracking-widest text-xs mt-1">{lang === "fr" ? "Bureau régional" : "Regional Office"}</p>
-                <p className="text-slate-600 mt-2 text-sm">1000 Gauchetière St W<br/>Montréal, QC H3B 4W5</p>
+                <h4 className="font-headline-md text-headline-md text-primary">Montréal</h4>
+                <p className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mt-0.5">{lang === "fr" ? "Bureau régional" : "Regional Office"}</p>
+                <p className="font-body-md text-body-md text-on-surface-variant mt-1">1000 Gauchetière St W<br/>Montréal, QC H3B 4W5</p>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section id="contact-section" className="py-24 px-6">
-        <div className="max-w-6xl mx-auto bg-primary rounded-[4rem] p-16 md:p-24 text-center text-white relative overflow-hidden shadow-2xl">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-secondary/20 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
-          <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-500/10 rounded-full blur-[80px]" />
-          
-          <div className="relative z-10 space-y-10">
-            <h2 className="text-4xl md:text-7xl font-black mb-8">{t.cta.title}</h2>
-            <p className="text-slate-300 text-xl mb-10 max-w-3xl mx-auto leading-relaxed">{t.cta.desc}</p>
+      <section id="contact-section" className="py-20 px-6 scroll-mt-24">
+        <div className="max-w-7xl mx-auto bg-primary rounded-xl px-8 md:px-16 py-12 md:py-16 text-white relative overflow-hidden">
+          <div className="absolute inset-0 opacity-5 pointer-events-none" style={{ backgroundImage: "radial-gradient(circle at 20% 50%, #ffffff 0%, transparent 50%)" }} />
+          <div className="relative z-10 flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-left">
+            <div>
+              <h2 className="font-display text-headline-lg text-headline-lg-mobile md:text-headline-lg text-white font-bold mb-2">{t.cta.title}</h2>
+              <p className="font-body-lg text-body-lg text-white/70">{t.cta.desc}</p>
+            </div>
             <button
               onClick={() => setShowContactForm(true)}
-              aria-label={t.cta.button}
-              className="bg-white text-primary px-12 py-6 rounded-2xl text-xl font-bold hover:scale-105 active:scale-95 transition-all shadow-2xl shadow-black/20"
+              className="bg-secondary text-white px-8 py-4 rounded-lg font-label-md text-headline-md hover:bg-secondary/90 active:scale-95 transition-all whitespace-nowrap shrink-0"
             >
               {t.cta.button}
             </button>
@@ -664,7 +640,7 @@ export default function App() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/50"
             role="dialog"
             aria-modal="true"
             aria-label={t.form.title}
@@ -674,42 +650,40 @@ export default function App() {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              transition={{ duration: 0.3 }}
-              className="bg-white rounded-[2.5rem] p-10 md:p-14 w-full max-w-lg shadow-2xl relative overflow-hidden"
+              transition={{ duration: 0.25 }}
+              className="bg-surface rounded-xl p-8 md:p-10 w-full max-w-lg premium-shadow relative"
             >
               <button
                 onClick={closeForm}
                 aria-label={t.form.close}
-                className="absolute top-6 right-6 w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center hover:bg-slate-200 transition-colors text-slate-600"
+                className="absolute top-5 right-5 w-9 h-9 rounded-lg bg-surface-container-low flex items-center justify-center hover:bg-surface-container transition-colors text-on-surface-variant"
               >
-                <X size={20} />
+                <X size={18} />
               </button>
 
               {formSuccess ? (
-                <div className="text-center py-12 space-y-6">
-                  <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto">
-                    <svg className="w-10 h-10 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <div className="text-center py-10 space-y-5">
+                  <div className="w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center mx-auto">
+                    <svg className="w-8 h-8 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
-                  <h3 className="text-3xl font-black text-primary">{t.form.successTitle}</h3>
-                  <p className="text-slate-600">{t.form.successDesc}</p>
+                  <h3 className="font-headline-md text-headline-md text-primary">{t.form.successTitle}</h3>
+                  <p className="text-on-surface-variant text-sm">{t.form.successDesc}</p>
                   <button
                     onClick={closeForm}
-                    className="bg-primary text-white px-8 py-4 rounded-2xl font-bold hover:bg-primary/90 transition-colors"
+                    className="bg-primary text-white px-6 py-3 rounded-lg font-bold text-sm hover:opacity-90 transition-opacity"
                   >
                     {t.form.close}
                   </button>
                 </div>
               ) : (
                 <>
-                  <div className="mb-10">
-                    <h3 className="text-3xl font-black text-primary">{t.form.title}</h3>
-                  </div>
+                  <h3 className="font-headline-md text-headline-md text-primary mb-6">{t.form.title}</h3>
 
-                  <form onSubmit={handleSubmit} noValidate className="space-y-6">
+                  <form onSubmit={handleSubmit} noValidate className="space-y-5">
                     <div>
-                      <label htmlFor="contact-name" className="block text-sm font-bold text-primary mb-2">
+                      <label htmlFor="contact-name" className="block font-label-md text-label-md text-primary font-semibold mb-1.5">
                         {t.form.name} <span className="text-secondary">*</span>
                       </label>
                       <input
@@ -720,16 +694,16 @@ export default function App() {
                         aria-required="true"
                         aria-invalid={!!formErrors.name}
                         aria-describedby={formErrors.name ? "name-error" : undefined}
-                        className={`w-full px-5 py-4 rounded-2xl border-2 text-base font-medium text-primary bg-slate-50 outline-none transition-colors ${formErrors.name ? "border-red-400 focus:border-red-500" : "border-slate-200 focus:border-secondary"}`}
+                        className={`w-full px-4 py-3 rounded-lg border text-sm font-medium text-on-surface bg-surface-container-low outline-none transition-colors ${formErrors.name ? "border-red-400" : "border-outline-variant focus:border-secondary"}`}
                         placeholder="Jean Dupont"
                       />
                       {formErrors.name && (
-                        <p id="name-error" className="mt-2 text-sm font-bold text-red-500" role="alert">{formErrors.name}</p>
+                        <p id="name-error" className="mt-1.5 text-xs font-semibold text-red-500" role="alert">{formErrors.name}</p>
                       )}
                     </div>
 
                     <div>
-                      <label htmlFor="contact-email" className="block text-sm font-bold text-primary mb-2">
+                      <label htmlFor="contact-email" className="block font-label-md text-label-md text-primary font-semibold mb-1.5">
                         {t.form.email} <span className="text-secondary">*</span>
                       </label>
                       <input
@@ -740,16 +714,16 @@ export default function App() {
                         aria-required="true"
                         aria-invalid={!!formErrors.email}
                         aria-describedby={formErrors.email ? "email-error" : undefined}
-                        className={`w-full px-5 py-4 rounded-2xl border-2 text-base font-medium text-primary bg-slate-50 outline-none transition-colors ${formErrors.email ? "border-red-400 focus:border-red-500" : "border-slate-200 focus:border-secondary"}`}
+                        className={`w-full px-4 py-3 rounded-lg border text-sm font-medium text-on-surface bg-surface-container-low outline-none transition-colors ${formErrors.email ? "border-red-400" : "border-outline-variant focus:border-secondary"}`}
                         placeholder="jean@hopital.ca"
                       />
                       {formErrors.email && (
-                        <p id="email-error" className="mt-2 text-sm font-bold text-red-500" role="alert">{formErrors.email}</p>
+                        <p id="email-error" className="mt-1.5 text-xs font-semibold text-red-500" role="alert">{formErrors.email}</p>
                       )}
                     </div>
 
                     <div>
-                      <label htmlFor="contact-message" className="block text-sm font-bold text-primary mb-2">
+                      <label htmlFor="contact-message" className="block font-label-md text-label-md text-primary font-semibold mb-1.5">
                         {t.form.message} <span className="text-secondary">*</span>
                       </label>
                       <textarea
@@ -760,17 +734,17 @@ export default function App() {
                         aria-required="true"
                         aria-invalid={!!formErrors.message}
                         aria-describedby={formErrors.message ? "message-error" : undefined}
-                        className={`w-full px-5 py-4 rounded-2xl border-2 text-base font-medium text-primary bg-slate-50 outline-none transition-colors resize-none ${formErrors.message ? "border-red-400 focus:border-red-500" : "border-slate-200 focus:border-secondary"}`}
+                        className={`w-full px-4 py-3 rounded-lg border text-sm font-medium text-on-surface bg-surface-container-low outline-none transition-colors resize-none ${formErrors.message ? "border-red-400" : "border-outline-variant focus:border-secondary"}`}
                         placeholder={lang === "fr" ? "Décrivez votre projet..." : "Describe your project..."}
                       />
                       {formErrors.message && (
-                        <p id="message-error" className="mt-2 text-sm font-bold text-red-500" role="alert">{formErrors.message}</p>
+                        <p id="message-error" className="mt-1.5 text-xs font-semibold text-red-500" role="alert">{formErrors.message}</p>
                       )}
                     </div>
 
                     <button
                       type="submit"
-                      className="w-full bg-secondary text-white py-5 rounded-2xl text-lg font-bold hover:bg-red-700 transition-colors shadow-xl shadow-red-100"
+                      className="w-full bg-secondary text-white py-3.5 rounded-lg font-bold text-sm hover:brightness-110 active:scale-[0.98] transition-all"
                     >
                       {t.form.submit}
                     </button>
@@ -783,72 +757,61 @@ export default function App() {
       </AnimatePresence>
 
       {/* Footer */}
-      <footer id="contact" className="bg-white border-t border-slate-100 pt-32 pb-16" role="contentinfo">
-        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 lg:grid-cols-4 gap-16">
-          <div className="space-y-8">
+      <footer id="contact" className="bg-surface-container-highest border-t border-outline-variant pt-16 pb-8 scroll-mt-24" role="contentinfo">
+        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 lg:grid-cols-4 gap-10">
+          <div className="space-y-4">
             <Logo />
-            <p className="text-slate-600 leading-relaxed">
+            <p className="text-sm text-on-surface-variant leading-relaxed">
               {t.footer.desc}
             </p>
-            <div className="flex gap-4">
-              {[Users, Mail, Globe].map((Icon, idx) => (
-                <button
-                  key={idx}
-                  aria-label={["Team", "Email", "Website"][idx]}
-                  className="w-12 h-12 rounded-xl bg-slate-100 flex items-center justify-center hover:bg-secondary hover:text-white cursor-pointer transition-all shadow-sm"
-                >
-                  <Icon size={20} aria-hidden="true" />
-                </button>
-              ))}
-            </div>
           </div>
           
           <div>
-            <h5 className="text-lg font-black mb-10 uppercase tracking-widest text-primary">{t.footer.links}</h5>
-            <ul className="space-y-5 text-slate-600 font-bold">
-              <li><a href="#" className="hover:text-secondary transition-colors">{lang === "fr" ? "Accueil" : "Home"}</a></li>
-              <li><a href="#about" className="hover:text-secondary transition-colors">{t.nav.about}</a></li>
-              <li><a href="#services" className="hover:text-secondary transition-colors">{t.nav.services}</a></li>
-              <li><a href="#contact" className="hover:text-secondary transition-colors">{lang === "fr" ? "Actualités" : "Insights"}</a></li>
+            <h5 className="font-label-md text-label-md text-on-surface font-bold uppercase tracking-wider mb-5">{t.footer.links}</h5>
+            <ul className="space-y-3">
+              <li><a href="#" className="text-sm text-on-surface-variant hover:text-secondary transition-colors">{lang === "fr" ? "Accueil" : "Home"}</a></li>
+              <li><a href="#about" className="text-sm text-on-surface-variant hover:text-secondary transition-colors">{t.nav.about}</a></li>
+              <li><a href="#services" className="text-sm text-on-surface-variant hover:text-secondary transition-colors">{t.nav.services}</a></li>
+              <li><a href="#contact" className="text-sm text-on-surface-variant hover:text-secondary transition-colors">{lang === "fr" ? "Actualités" : "Insights"}</a></li>
             </ul>
           </div>
           
           <div>
-            <h5 className="text-lg font-black mb-10 uppercase tracking-widest text-primary">{t.nav.services}</h5>
-            <ul className="space-y-5 text-slate-600 font-bold">
-              <li><a href="#" className="hover:text-secondary transition-colors">{lang === "fr" ? "Gestion de la Performance" : "Performance Management"}</a></li>
-              <li><a href="#" className="hover:text-secondary transition-colors">{lang === "fr" ? "Mobilisation des Équipes" : "Team Engagement"}</a></li>
-              <li><a href="#" className="hover:text-secondary transition-colors">{lang === "fr" ? "Développement du Leadership" : "Leadership Development"}</a></li>
-              <li><a href="#" className="hover:text-secondary transition-colors">{lang === "fr" ? "Formations Pratiques" : "Practical Training"}</a></li>
+            <h5 className="font-label-md text-label-md text-on-surface font-bold uppercase tracking-wider mb-5">{t.nav.services}</h5>
+            <ul className="space-y-3">
+              <li><a href="#" className="text-sm text-on-surface-variant hover:text-secondary transition-colors">{lang === "fr" ? "Gestion de la Performance" : "Performance Management"}</a></li>
+              <li><a href="#" className="text-sm text-on-surface-variant hover:text-secondary transition-colors">{lang === "fr" ? "Mobilisation des Équipes" : "Team Engagement"}</a></li>
+              <li><a href="#" className="text-sm text-on-surface-variant hover:text-secondary transition-colors">{lang === "fr" ? "Développement du Leadership" : "Leadership Development"}</a></li>
+              <li><a href="#" className="text-sm text-on-surface-variant hover:text-secondary transition-colors">{lang === "fr" ? "Formations Pratiques" : "Practical Training"}</a></li>
             </ul>
           </div>
 
           <div>
-            <h5 className="text-lg font-black mb-10 uppercase tracking-widest text-primary">{t.footer.contact}</h5>
-            <ul className="space-y-6 text-slate-600 font-bold">
-              <li className="flex items-start gap-4">
-                <Mail size={20} className="text-secondary shrink-0 mt-1" aria-hidden="true" /> 
-                <span>info@gps-canada.com</span>
+            <h5 className="font-label-md text-label-md text-on-surface font-bold uppercase tracking-wider mb-5">{t.footer.contact}</h5>
+            <ul className="space-y-4">
+              <li className="flex items-start gap-3">
+                <Mail size={16} className="text-secondary shrink-0 mt-0.5" aria-hidden="true" /> 
+                <span className="text-sm text-on-surface-variant">info@gps-canada.com</span>
               </li>
-              <li className="flex items-start gap-4">
-                <Phone size={20} className="text-secondary shrink-0 mt-1" aria-hidden="true" /> 
-                <span>+1 (416) 555-0123</span>
+              <li className="flex items-start gap-3">
+                <Phone size={16} className="text-secondary shrink-0 mt-0.5" aria-hidden="true" /> 
+                <span className="text-sm text-on-surface-variant">+1 (416) 555-0123</span>
               </li>
-              <li className="flex items-start gap-4">
-                <MapPin size={20} className="text-secondary shrink-0 mt-1" aria-hidden="true" /> 
-                <span>{t.footer.address}</span>
+              <li className="flex items-start gap-3">
+                <MapPin size={16} className="text-secondary shrink-0 mt-0.5" aria-hidden="true" /> 
+                <span className="text-sm text-on-surface-variant">{t.footer.address}</span>
               </li>
             </ul>
           </div>
         </div>
         
-        <div className="max-w-7xl mx-auto px-6 border-t border-slate-100 mt-32 pt-10 flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="text-sm font-bold text-slate-600">
+        <div className="max-w-7xl mx-auto px-6 border-t border-outline-variant mt-12 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-xs font-medium text-on-surface-variant">
             {t.footer.rights}
           </p>
-          <div className="flex gap-8 text-sm font-bold text-slate-600">
-             <a href="#" className="hover:text-secondary">Privacy Policy</a>
-             <a href="#" className="hover:text-secondary">Terms of Service</a>
+          <div className="flex gap-6 text-xs font-medium text-on-surface-variant">
+             <a href="#" className="hover:text-secondary transition-colors">Privacy Policy</a>
+             <a href="#" className="hover:text-secondary transition-colors">Terms of Service</a>
           </div>
         </div>
       </footer>
